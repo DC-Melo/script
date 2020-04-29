@@ -1,13 +1,20 @@
-#!/bin/bash
-WeekDay=`date +%V%a%y`
-DateDay=`date +%Y%m%d`
+#!/bin/sh
+echo '
+-------------------------------------------------------------------------
+| Time	: Wed Apr 29 21:34:21 CST 2020
+| Author: Melo.DC
+| Email	: melo.dachar@gmail.com
+| Func.	: check system type shell code 
+| Param.: None
+| Exam.	: 
+------------------------------------------------------------------------
+'
+
 echo $OSTYPE
 if [[ "$OSTYPE" == "linux-gnu" ]]; then
     echo  under GNU/Linux platform
-    LiveDay=$((($(date +%s) - $(date --date="19851018" +%s) )/(60*60*24) ))
 elif [[ "$OSTYPE" == "darwin"* ]]; then
     echo  under Mac OS X platform        
-    LiveDay=$(((`date +%s` - `date -jf %Y-%m-%d 1985-10-18 +%s`)/86400))
 elif [[ "$OSTYPE" == "cygwin" ]]; then
     echo  POSIX compatibility layer and Linux environment emulation for Windows
 elif [[ "$OSTYPE" == "msys" ]]; then
@@ -19,7 +26,3 @@ elif [[ "$OSTYPE" == "freebsd"* ]]; then
 else
     echo Unknown system
 fi
-RemainingDay=$((12578*2-$LiveDay))
-
-echo Today is: $DateDay $WeekDay, Live days: $LiveDay days,Remaining Days: $RemainingDay days
-echo $RemainingDay-$WeekDay-$DateDay

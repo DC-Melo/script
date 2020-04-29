@@ -4,13 +4,13 @@ WeekDay=`date +%V%a%y`
 DateDay=`date +%Y%m%d`
 echo $OSTYPE
 if [[ "$OSTYPE" == "linux-gnu" ]]; then
-    echo  Do something under GNU/Linux platform
+    echo under GNU/Linux platform
     LiveDay=$((($(date +%s) - $(date --date="19851018" +%s) )/(60*60*24) ))
 elif [[ "$OSTYPE" == "darwin"* ]]; then
-    echo  Do something under Mac OS X platform        
+    echo under Mac OS X platform        
     LiveDay=$(((`date +%s` - `date -jf %Y-%m-%d 1985-10-18 +%s`)/86400))
 elif [[ "$OSTYPE" == "cygwin" ]]; then
-    echo  POSIX compatibility layer and Linux environment emulation for Windows
+    echo POSIX compatibility layer and Linux environment emulation for Windows
 elif [[ "$OSTYPE" == "msys" ]]; then
     echo Lightweight shell and GNU utilities compiled for Windows part of MinGW
 elif [[ "$OSTYPE" == "win32" ]]; then
