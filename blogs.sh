@@ -24,5 +24,5 @@ fi
 RemainingDay=$((12578*2-$LiveDay))
 
 echo Today is: $DateDay $WeekDay, Live days: $LiveDay days,Remaining Days: $RemainingDay days
-echo $WeekDay-$DateDay-$RemainingDay
-touch $WeekDay-$DateDay-$RemainingDay
+echo $RemainingDay-$WeekDay-$DateDay
+touch $RemainingDay-$WeekDay-$DateDay
