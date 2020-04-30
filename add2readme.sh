@@ -1,4 +1,3 @@
-#!/bin/bash
 #!/bin/sh
 echo '
 -------------------------------------------------------------------------
@@ -10,7 +9,6 @@ echo '
 | Exam.	: ss2readme.sh doc png
 ------------------------------------------------------------------------
 '
-
 
 # check parameter
 if [ $# -eq 0 ]; then
@@ -26,5 +24,23 @@ fi
 
 #screen shot and save file 
 pngfilename=$2-`date +%Y-%m-%d-%H-%M-%S`.png
-gnome-screenshot -d 1 -f $1/res/$pngfilename
+echo $OSTYPE
+if [[ "$OSTYPE" == "linux-gnu" ]]; then
+    echo  under GNU/Linux platform
+    gnome-screenshot -d 1 -f $1/res/$pngfilename
+elif [[ "$OSTYPE" == "darwin"* ]]; then
+    echo  under Mac OS X platform        
+elif [[ "$OSTYPE" == "cygwin" ]]; then
+    echo  POSIX compatibility layer and Linux environment emulation for Windows
+elif [[ "$OSTYPE" == "msys" ]]; then
+    echo Lightweight shell and GNU utilities compiled for Windows part of MinGW
+elif [[ "$OSTYPE" == "win32" ]]; then
+    echo win32 Im not sure this can happen.
+elif [[ "$OSTYPE" == "freebsd"* ]]; then
+    echo freebsd
+else
+    echo Unknown system
+fi
+
+
 echo '<img src="./res/'$pngfilename'" alt="'$2'"/> ' >> $1/readme.html
