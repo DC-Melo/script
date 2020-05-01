@@ -1,25 +1,29 @@
 #!/bin/bash
-WeekDay=`date +%V%a%y`
-DateDay=`date +%Y%m%d`
-echo $OSTYPE
-if [[ "$OSTYPE" == "linux-gnu" ]]; then
-    echo  under GNU/Linux platform
-    LiveDay=$((($(date +%s) - $(date --date="19851018" +%s) )/(60*60*24) ))
-elif [[ "$OSTYPE" == "darwin"* ]]; then
-    echo  under Mac OS X platform        
-    LiveDay=$(((`date +%s` - `date -jf %Y-%m-%d 1985-10-18 +%s`)/86400))
-elif [[ "$OSTYPE" == "cygwin" ]]; then
-    echo  POSIX compatibility layer and Linux environment emulation for Windows
-elif [[ "$OSTYPE" == "msys" ]]; then
-    echo Lightweight shell and GNU utilities compiled for Windows part of MinGW
-elif [[ "$OSTYPE" == "win32" ]]; then
-    echo win32 Im not sure this can happen.
-elif [[ "$OSTYPE" == "freebsd"* ]]; then
-    echo freebsd
+if [  -n "$(uname -a | grep -i ubuntu)" ]; then
+    dateBegin=$(date --date="19851018" +%s)
+elif [  -n "$(uname -a | grep -i centos)" ]; then
+    yum update
+elif [  -n "$(uname -a | grep -i darwin)" ]; then
+    dateBegin=`date -jf %Y%m%d 19851018 +%s`
 else
     echo Unknown system
 fi
+if [ ! -n "$1" ] ;then
+    echo "you have not input a word!"
+    dateEnd=$(date +%s)
+    WeekDay=`date +%V%a%y`
+    DateDay=`date +%Y%m%d`
+else
+    echo "the word you input is $1"
+    dateEnd=`date -d $1 +%s`
+    WeekDay=`date -d $1 +%V%a%y`
+    DateDay=`date -d $1 +%Y%m%d`
+fi
+
+
+LiveDay=$((($dateEnd - $dateBegin)/86400))
 RemainingDay=$((12578*2-$LiveDay))
 
 echo Today is: $DateDay $WeekDay, Live days: $LiveDay days,Remaining Days: $RemainingDay days
 echo $RemainingDay-$WeekDay-$DateDay
+# touch $RemainingDay-$WeekDay-$DateDay
